@@ -37,7 +37,10 @@ public class LinkedList {
 
 		while(current_node != null) {
 			if(current_node.data == number){
-				previous_node.pointer_next_node = current_node.pointer_next_node;
+				if (current_node == head)
+					head = current_node.pointer_next_node;
+				else
+					previous_node.pointer_next_node = current_node.pointer_next_node;
 				return current_node.data;
 			}
 			else{
@@ -64,10 +67,16 @@ public class LinkedList {
 		System.out.print("The elements in the list after deleting 4 :");
 		my_linked_list.show_list();
 
-		// This done not work with the above delete_node
+		// 5  3 -- > 3
 		int number_deleted_2 = my_linked_list.delete_node(5);
 		System.out.println("\nNumber which has been deleted is : " + number_deleted_2);
 		System.out.print("The elements in the list after deleting 5 :");
+		my_linked_list.show_list();
+
+		// 3 -- > -1
+		int number_deleted_3 = my_linked_list.delete_node(3);
+		System.out.println("\nNumber which has been deleted is : " + number_deleted_3);
+		System.out.print("The elements in the list after deleting 3 :");
 		my_linked_list.show_list();
 	}
 }
