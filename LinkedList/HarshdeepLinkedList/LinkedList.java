@@ -2,7 +2,6 @@ import java.util.*;
 
 public class LinkedList {
 	Node head;
-	Node original_node;
 
 	public LinkedList(){
 		head = null; // Initially the node will be null
@@ -18,11 +17,10 @@ public class LinkedList {
 
 		// original_node is basically acting like as a temp node
 		Node current_node = head;
-		while(current_node != null){
-			original_node = current_node;
+		while(current_node.pointer_next_node != null){
 			current_node = current_node.pointer_next_node;
 		}
-		original_node.pointer_next_node = new_node;
+		current_node.pointer_next_node = new_node;
 	}
 
 	public void show_list(){
