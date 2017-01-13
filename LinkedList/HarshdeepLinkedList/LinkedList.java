@@ -26,9 +26,26 @@ public class LinkedList {
 	public void show_list(){
 		Node current_node = head;
 		while(current_node != null){
-			System.out.println(current_node.data);
+			System.out.print(current_node.data + "  ");
 			current_node = current_node.pointer_next_node;
 		}
+	}
+
+	public int delete_node(int number){
+		Node previous_node = null;
+		Node current_node = head;
+
+		while(current_node != null) {
+			if(current_node.data == number){
+				previous_node.pointer_next_node = current_node.pointer_next_node;
+				return current_node.data;
+			}
+			else{
+				previous_node = current_node;
+				current_node = current_node.pointer_next_node;
+			}
+		}
+		return -1;
 	}
 
 	// Have to add the deletion method
@@ -38,6 +55,19 @@ public class LinkedList {
 		my_linked_list.add_node(4);
 		my_linked_list.add_node(3);
 
+		System.out.print("The elements in the list : ");
+		my_linked_list.show_list();
+
+		// 5  4  3 -- > 5   3
+		int number_deleted = my_linked_list.delete_node(4);
+		System.out.println("\nNumber which has been deleted is : " + number_deleted);
+		System.out.print("The elements in the list after deleting 4 :");
+		my_linked_list.show_list();
+
+		// This done not work with the above delete_node
+		int number_deleted_2 = my_linked_list.delete_node(5);
+		System.out.println("\nNumber which has been deleted is : " + number_deleted_2);
+		System.out.print("The elements in the list after deleting 5 :");
 		my_linked_list.show_list();
 	}
 }
