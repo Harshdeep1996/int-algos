@@ -1,2 +1,2 @@
 # int-algos
-Algorithms Playground Practice
+Data Structures and Algorithms Playground Practice
