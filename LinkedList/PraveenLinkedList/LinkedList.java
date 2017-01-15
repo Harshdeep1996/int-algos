@@ -6,8 +6,6 @@ package LinkedList.PraveenLinkedList;
 
 import java.util.*;
 
-import com.sun.org.apache.xerces.internal.impl.xs.util.LSInputListImpl;
-
 class Node{
     int data;
     Node next;
@@ -106,8 +104,8 @@ public class LinkedList{
     }
 
 
-    public void swapNodes(int item1, int item2){
-        /* UNIMPLEMENTED - Swaps two nodes in a linked list */
+    /*public void swapNodes(int item1, int item2){
+        // UNIMPLEMENTED - Swaps two nodes in a linked list 
         Node cur = head;
         Node prev = null;
         while(cur != null && cur.data != item1){
@@ -130,7 +128,7 @@ public class LinkedList{
         prev.next = prev2.next;
 
         prev2.next = temp;
-    }
+    }*/
 
 
     public static Node reverse(Node list){
@@ -154,7 +152,41 @@ public class LinkedList{
 
     }
 
-    //public void merge(Node list1,)
+    public void rotate(int count){
+        //rotates Linked list. Positive value = left rotation. Negative value = right rotation.
+        if(count == 0)
+            return;
+        Node cur = head;
+        int length = LinkedList.length(head);
+        if(count < 0){
+            count = -count;
+            count = count % length;
+            count = length - count;
+        }
+        else
+            count = count % length;
+        if(count == 0)
+            return;
+        while(--count > 0){
+            cur = cur.next;
+        }
+        Node temp = cur.next;
+        cur.next = null;
+        Node cur2 = temp;
+        while(cur2.hasNext()){
+            cur2 = cur2.next;
+        }
+        cur2.next = head;
+        head = temp;
+
+    }
+
+    /*public void reverse_in_groups(int count){
+        // UNIMPLEMENTED
+        if(count <= 1)
+            return;
+        
+    }*/
 
     public static void main(String[] args){
         LinkedList list = new LinkedList();
@@ -182,7 +214,14 @@ public class LinkedList{
         System.out.println("Length: " + LinkedList.length(list.head));
         LinkedList.reverse_wrapper(list);
         list.display();
-        
+        list.rotate(1); //rotate once to the left
+        list.display();
+        list.rotate(3); //rotate thrice to the left
+        list.display();
+        list.rotate(5);
+        list.display();
+        list.rotate(-3); //rotate thrice to the right
+        list.display();
     }
 }
 
