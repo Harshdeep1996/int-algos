@@ -57,6 +57,7 @@ public class LinkedList {
 		}
 	}
 
+	/* Linked list find length iterative version */
 	public int get_length(){
 		int length = 0;
 		Node current_node = head;
@@ -68,7 +69,36 @@ public class LinkedList {
 	}
 
 	public void delete_node_at_position(int position) {
-		// Need to implement it in next commit. 
+		Node current_node = head;
+
+		/* If head is null, nothing in the list basically */
+		if(head == null){
+			System.out.println("The position does not exist in the list.");
+			return;
+		}
+
+		/* Need to delete the head of the list */
+		if(position == 0){
+			head = current_node.pointer_next_node;
+			return;
+		}
+
+		// Finding the previous node
+		int i = 0;
+		while(current_node != null && i < position - 1){
+			current_node = current_node.pointer_next_node;
+			i = i + 1;
+		}
+
+		// if the user ask to delete a node, which does not exist
+		if (current_node == null || current_node.pointer_next_node == null){
+			return;
+		}
+
+		// Need to make a new variable here, otherwise it will not point to
+		// the right node.
+		Node new_next = current_node.pointer_next_node.pointer_next_node;
+		current_node.pointer_next_node = new_next;
 	}
 
 	public int delete_node(int number){
@@ -125,12 +155,32 @@ public class LinkedList {
 		list_2.add_node_at_front(1);
 		list_2.add_node_at_front(0);
 
-		// int number_deleted_4 = list_2.delete_node(0);
+		// Test if header position is deleted - for position
+		list_2.delete_node_at_position(0);
 
+		// int number_deleted_4 = list_2.delete_node(0);
+		// 0   1   2
 		System.out.print("\n\n The elements in the list 2 are: ");
 		list_2.show_list();
+
+		// Length is 3 for list_2, can be used for delete position
 		int length_of_list_2 = list_2.get_length();
 		System.out.println("\n\n Length of the list is : " + length_of_list_2);
+
+
+		/* Add elements at the starting of the linked list */
+		LinkedList list_3 = new LinkedList();
+		list_3.add_node_at_front(9);
+		list_3.add_node_at_front(8);
+		list_3.add_node_at_front(7);
+
+		// Test if header any other position is deleted - for position
+		list_3.delete_node_at_position(1);
+
+		// int number_deleted_4 = list_2.delete_node(0);
+		// 7   8   9 ->    7   9
+		System.out.print("\n\n The elements in the list 3 are: ");
+		list_3.show_list();
 
 
 	}
