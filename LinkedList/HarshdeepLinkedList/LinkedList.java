@@ -68,6 +68,13 @@ public class LinkedList {
 		return length;
 	}
 
+	public int get_length_recursive(Node node){
+		if (node == null){
+			return 0;
+		}
+		return 1 + get_length_recursive(node.pointer_next_node);
+	}
+
 	public void delete_node_at_position(int position) {
 		Node current_node = head;
 
@@ -181,6 +188,14 @@ public class LinkedList {
 		// 7   8   9 ->    7   9
 		System.out.print("\n\n The elements in the list 3 are: ");
 		list_3.show_list();
+
+		// For if the head is null and deleting position
+		LinkedList list_4 = new LinkedList();
+		list_4.delete_node_at_position(9);
+
+		// Length is 2 for list_3, using recursive function
+		int length_of_list_3 = list_3.get_length_recursive(list_3.head);
+		System.out.println("\n\n Length of the list 3 is : " + length_of_list_3);
 
 
 	}
