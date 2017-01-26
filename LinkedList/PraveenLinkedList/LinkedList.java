@@ -1,6 +1,6 @@
 /*
  *author: praveensvsrk
- 
+
  */
 package LinkedList.PraveenLinkedList;
 
@@ -27,6 +27,57 @@ public class LinkedList{
         head = null;
     }
 
+    public LinkedList(Node head){ //Copy Constructor (not deep copy)
+        this.head = head;
+    }
+
+    public LinkedList(int number){
+        this.intToLL(number);
+    }
+
+    public void intToLL(int number){
+        /*Converts integer to LinkedList*/
+        head = null;
+        boolean isNegative = false;
+        if (number < 0){
+            number = -number;
+            isNegative = true;
+        }
+        while(number > 0){
+            this.addNodeAtBeg(number % 10);
+            number /= 10;
+        }
+        if(isNegative)
+            head.data = -head.data;
+    }
+
+    public int LLtoInt(){
+        /*
+        Converts a Linked List that represents a number into a number
+        Works for all types of Integers
+        */
+        if(head == null)
+            return 0;
+        Node cur = head;
+        boolean isNegative = false;
+        int result = 0;
+
+        if(cur.data < 0){
+            result = -cur.data;
+            isNegative = true;
+            cur = cur.next;
+        }
+
+        while(cur.hasNext()){
+            result *= 10;
+            result += cur.data;
+            cur = cur.next;
+        }
+
+        if(isNegative)
+            return -result;
+        return result;
+    }
 
     public void addNodeAtEnd(int item){
         /* Adds nodes at the end of linked list */
@@ -41,14 +92,13 @@ public class LinkedList{
             cur = cur.next;
         }
         cur.next = node;
-        
     }
 
 
     public void addNodeAtBeg(int item){
         /* Adds nodes at the beginning of linked list */
         Node node = new Node(item);
-        
+
         if(head == null){
             head = node;
             return;
@@ -86,7 +136,7 @@ public class LinkedList{
     public void display(){
         /* Displays linked list */
         Node cur = head;
-        
+
         while(cur != null){
             System.out.print(cur.data + " -> ");
             cur = cur.next;
@@ -105,7 +155,7 @@ public class LinkedList{
 
 
     /*public void swapNodes(int item1, int item2){
-        // UNIMPLEMENTED - Swaps two nodes in a linked list 
+        // UNIMPLEMENTED - Swaps two nodes in a linked list
         Node cur = head;
         Node prev = null;
         while(cur != null && cur.data != item1){
@@ -185,7 +235,7 @@ public class LinkedList{
         // UNIMPLEMENTED
         if(count <= 1)
             return;
-        
+
     }*/
 
     public static void main(String[] args){
@@ -222,6 +272,14 @@ public class LinkedList{
         list.display();
         list.rotate(-3); //rotate thrice to the right
         list.display();
+
+
+        LinkedList list2 = new LinkedList(12345); //Integer to LL
+        list2.display();
+        System.out.println("The integer form of above list: " + list2.LLtoInt()); //LL to integer
+
+        list2 = new LinkedList(-7654345);
+        list2.display();
+        System.out.println("The integer form of above list: " + list2.LLtoInt());
     }
 }
-
