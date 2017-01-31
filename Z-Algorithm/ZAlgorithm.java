@@ -1,6 +1,41 @@
 import java.util.Scanner;
 
-// TODO: Full explaination in comments
+/*
+	Z Algorithm is a pattern matching algorithm, with the time complexity of 
+	O(M + N), where M is the length of the pattern and N is the length of the 
+	text. 
+
+	It is basically used with the pattern to be found in the text added as a
+	prefix to the text for something like:
+
+	bluemix = text
+	mix = pattern
+
+	pattern plus text = mix + "$" + bluemix => mix$bluemix
+	For this pattern plus text, we form a Z array, which stores how many 
+	elements on a particular index matches starting from the prefix of the
+	string.
+
+	lets say for 
+	
+	index  = 0 1 2 3 4 5 6 7 8 9 10
+	text   = m i x $ b l u e m i x
+	Zvalue = 0 0 0 0 0 0 0 0 3 0 0
+
+	if the Z value is equal to the length of the string we are trying to find
+	in the pattern plus text we have found the string. 
+
+	We always set the value of the first character to be 0, considering there is
+	no prefix before it. 
+	
+	An important case we need to consider in this algorithm is: for a matched
+	string, it is contained inside a `LR` window, now for the above example
+	there is a LR window starting from m to x -> `mix` from indexes 8 to 10. 
+
+	if the corresponding Z value in the prefix is greater than the length of the 
+	string left, then we need to consider finding new Z value and form a new LR
+	window. 
+*/
 public class ZAlgorithm
 {
 	static int [] z_array;
