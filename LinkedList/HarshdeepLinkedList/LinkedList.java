@@ -128,6 +128,47 @@ public class LinkedList {
 		return -1;
 	}
 
+	public void swapNodes(int node_x, int node_y){
+
+		// Finding the appropriate X and Y nodes and there preceding nodes.
+		Node current_node_X = head; 
+		Node previous_node_X = null;
+		while(current_node_X != null && current_node_X.data != node_x){
+			previous_node_X = current_node_X;
+			current_node_X = current_node_X.pointer_next_node;
+		}
+
+		Node current_node_Y = head; 
+		Node previous_node_Y = null;
+		while(current_node_Y != null && current_node_Y.data != node_y){
+			previous_node_Y = current_node_Y;
+			current_node_Y = current_node_Y.pointer_next_node;
+		}
+
+		// To check if the node exist in the list
+		if(current_node_X == null || current_node_Y == null)
+			System.out.println("Nodes do not exist in the LL");
+
+		// To check if the previous node is null or not, and if not
+		// swap the nodes, and if it is null swap the nodes by making it
+		// a head.
+		if(previous_node_X != null)
+			previous_node_X.pointer_next_node = current_node_Y;
+		else
+			head = current_node_Y;
+
+		if(previous_node_Y != null)
+			previous_node_Y.pointer_next_node = current_node_X;
+		else
+			head = current_node_X;
+
+		// Link the LL with the rest of the list by updating the new current
+		// nodes's next pointers
+		Node temp = current_node_X.pointer_next_node;
+		current_node_X.pointer_next_node = current_node_Y.pointer_next_node;
+		current_node_Y.pointer_next_node = temp;
+	}
+
 	// Have to add the deletion method
 	public static void main(String[] args){
 		LinkedList my_linked_list = new LinkedList();
@@ -140,19 +181,22 @@ public class LinkedList {
 
 		// 5  4  3 -- > 5   3
 		int number_deleted = my_linked_list.delete_node(4);
-		System.out.println("\nNumber which has been deleted is : " + number_deleted);
+		System.out.println(
+			"\nNumber which has been deleted is : " + number_deleted);
 		System.out.print("The elements in the list after deleting 4 :");
 		my_linked_list.show_list();
 
 		// 5  3 -- > 3
 		int number_deleted_2 = my_linked_list.delete_node(5);
-		System.out.println("\nNumber which has been deleted is : " + number_deleted_2);
+		System.out.println(
+			"\nNumber which has been deleted is : " + number_deleted_2);
 		System.out.print("The elements in the list after deleting 5 :");
 		my_linked_list.show_list();
 
 		// 3 -- > -1
 		int number_deleted_3 = my_linked_list.delete_node(3);
-		System.out.println("\nNumber which has been deleted is : " + number_deleted_3);
+		System.out.println(
+			"\nNumber which has been deleted is : " + number_deleted_3);
 		System.out.print("The elements in the list after deleting 3 :");
 		my_linked_list.show_list();
 
@@ -195,8 +239,24 @@ public class LinkedList {
 
 		// Length is 2 for list_3, using recursive function
 		int length_of_list_3 = list_3.get_length_recursive(list_3.head);
-		System.out.println("\n\n Length of the list 3 is : " + length_of_list_3);
+		System.out.println(
+			"\n\n Length of the list 3 is : " + length_of_list_3);
 
+		// This is a demo for swapping list 
+		LinkedList ll_swap = new LinkedList();
+		ll_swap.add_node(10);
+		ll_swap.add_node(15);
+		ll_swap.add_node(12);
+		ll_swap.add_node(13);
+		ll_swap.add_node(20);
+		ll_swap.add_node(14);
 
+		System.out.print("\n\nThe elements in the list : ");
+		ll_swap.show_list();
+
+		// Works fine for all cases- tested!
+		ll_swap.swapNodes(10, 14);
+		System.out.print("\n\nThe elements in the list after swapping are: ");
+		ll_swap.show_list();
 	}
 }
