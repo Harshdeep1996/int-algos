@@ -169,6 +169,34 @@ public class LinkedList {
 		current_node_Y.pointer_next_node = temp;
 	}
 
+	/*
+		So basically the logic for the reversing a linked list is by 
+		concentrating on the pointer of the next done and swapping them,
+		and updating the current node. - More efficient, then I thought!
+
+		1 -> 2 -> 3 -> 4 -> NULL
+
+		After 1st iteration, ]
+
+		<- 1   2 -> 3-> 4-> NULL
+
+		and don't forget to change the head to previous node after the loop has
+		finished.
+	*/
+	public void reverseLL() {
+		Node current_node = head;
+		Node previous_node = null;
+		Node next_node = null;
+
+		while(current_node != null){
+			next_node = current_node.pointer_next_node;
+			current_node.pointer_next_node = previous_node;
+			previous_node = current_node; 
+			current_node = next_node; 
+		}
+		head = previous_node;
+	}
+
 	// Have to add the deletion method
 	public static void main(String[] args){
 		LinkedList my_linked_list = new LinkedList();
@@ -258,5 +286,23 @@ public class LinkedList {
 		ll_swap.swapNodes(10, 14);
 		System.out.print("\n\nThe elements in the list after swapping are: ");
 		ll_swap.show_list();
+
+
+		// This is a demo for reversing a list
+		LinkedList reverse_ll = new LinkedList();
+		reverse_ll.add_node(1);
+		reverse_ll.add_node(2);
+		reverse_ll.add_node(3);
+		reverse_ll.add_node(4);
+		reverse_ll.add_node(5);
+
+		System.out.print("\n\nThe elements in the list : ");
+		reverse_ll.show_list();
+
+		// Works fine for all cases- tested!
+		reverse_ll.reverseLL();
+		System.out.print("\n\nThe elements in the list after reversing are: ");
+		reverse_ll.show_list();
+
 	}
 }
