@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 // Continue going through the adjancency list
-public class DepthFirstSearch {
+public class HarshdeepDepthFirstSearch {
 
 	// This is basically a generic list of Integers array. 
 	// An adjacency list of each node - and then apply DFS on it
