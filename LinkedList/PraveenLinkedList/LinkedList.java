@@ -203,7 +203,7 @@ public class LinkedList{
     }
 
     public void rotate(int count){
-        //rotates Linked list. Positive value = left rotation. Negative value = right rotation.
+        /*rotates Linked list. Positive value = left rotation. Negative value = right rotation.*/
         if(count == 0)
             return;
         Node cur = head;
@@ -231,12 +231,36 @@ public class LinkedList{
 
     }
 
-    /*public void reverse_in_groups(int count){
-        // UNIMPLEMENTED
+    public void reverse_in_groups(int count){
+        /*Reverses every 'count' number of nodes*/
         if(count <= 1)
             return;
+        int temp = count;
+        Node cur = this.head;
+        Node tail = cur;
+        Node prev = null;
+        while(cur.hasNext()){
+            temp = count;
+            while(cur.hasNext() && temp != 1){
+                prev = cur;
+                cur = cur.next;
+                temp--;
+            }
+            Node newhead = cur;
+            Node tempnode = cur.next;
+            newhead.next = null;
+            if(tail == head){
+                this.head = newhead;
+            }
+            LinkedList.reverse(tail)->next = tempnode;
+            tail = tempnode;
 
-    }*/
+
+        }
+
+    }
+
+
 
     public static void main(String[] args){
         LinkedList list = new LinkedList();
